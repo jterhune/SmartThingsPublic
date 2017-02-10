@@ -7,6 +7,9 @@ apply plugin: 'groovy'
 apply plugin: 'smartthings-executable-deployment'
 apply plugin: 'smartthings-slack'
 
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
 buildscript {
     dependencies {
         classpath "com.smartthings.deployment:executable-deployment-scripts:1.0.8"
@@ -25,7 +28,6 @@ buildscript {
 }
 
 repositories {
-    mavenLocal()
     jcenter()
     maven {
         credentials {
@@ -49,11 +51,13 @@ sourceSets {
     }
 }
 
+compileSmartappsGroovy.groovyOptions.optimizationOptions.indy = true
+
 dependencies {
-    devicetypesCompile 'org.codehaus.groovy:groovy-all:2.4.7'
+    devicetypesCompile 'org.codehaus.groovy:groovy-all:2.4.7:indy'
     devicetypesCompile 'smartthings:appengine-z-wave:0.1.2'
     devicetypesCompile 'smartthings:appengine-zigbee:0.1.11'
-    smartappsCompile 'org.codehaus.groovy:groovy-all:2.4.7'
+    smartappsCompile 'org.codehaus.groovy:groovy-all:2.4.7:indy'
     smartappsCompile 'smartthings:appengine-common:0.1.8'
     smartappsCompile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
     smartappsCompile 'org.grails:grails-web:2.3.11'
